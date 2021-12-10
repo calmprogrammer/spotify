@@ -5,6 +5,7 @@ import { shuffle } from "lodash";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
+import Songs from "./Songs";
 
 const colors = [
 	"from-indigo-500",
@@ -39,7 +40,7 @@ function Center() {
 	console.log(playlist);
 
 	return (
-		<div className="flex-grow text-white">
+		<div className="flex-grow h-screen overflow-y-scroll scrollbar-hide text-white">
 			<header className="absolute top-5 right-8">
 				<div className="flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2">
 					<img
@@ -53,7 +54,7 @@ function Center() {
 			</header>
 
 			<section
-				className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white `}
+				className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8 `}
 			>
 				<img
 					className="h-44 w-44 shadow-2xl"
@@ -66,6 +67,9 @@ function Center() {
 					</h1>
 				</div>
 			</section>
+			<div>
+				<Songs />
+			</div>
 		</div>
 	);
 }
