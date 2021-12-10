@@ -7,9 +7,21 @@ import {
 	RssIcon,
 } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
+import useSpotify from "../hooks/useSpotify";
 
 function Sidebar() {
+	const spotifyApi = useSpotify();
 	const { data: session, status } = useSession();
+	const [playlists, setPlaylists] = useState([]);
+
+	useEffect(() => {
+		if (spotifyApi.getAccessToken()) {
+			spotifyApi.getUserPlaylists.then((data) => {
+				setPlaylists(data.body.items);
+			});
+		}
+	}, [session, spotifyApi]);
 
 	console.log(session);
 	return (
